@@ -7,7 +7,7 @@
 	$config = array();
 	
 	if(ENVIRONMENT == 'development') {
-		define("BASE_URL", "http://localhost/SistemaEmbaixadas/");
+		define("BASE_URL", "http://localhost/SistemaEmbaixada/");
 		$config['dbname'] = 'sistema_embaixadas';
 		$config['host'] = 'localhost';
 		$config['dbuser'] = 'root';
