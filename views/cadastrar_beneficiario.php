@@ -7,8 +7,5 @@
 </form>
 <br>
 <button><a href="<?php echo BASE_URL; ?>mdc/beneficiario">Voltar</a></button>
-<?php
-if (isset($msg)){
-	echo $msg;
-}
-?>
+
+<?php if(isset($msg)) {echo $msg;} ?>

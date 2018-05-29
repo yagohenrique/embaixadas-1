@@ -16,6 +16,20 @@
 			}
 		}
 
+		public function getMdcIdPeloNome($nome_mdc) {
+
+			$sql = $this->connection->prepare("SELECT id FROM mdc WHERE nome_mdc = ?");
+			$sql->bindValue(1, $nome_mdc);
+			$sql->execute();
+
+			if($sql->rowCount() > 0) {
+				$sql = $sql->fetch();
+				$id_mdc = $sql['id'];
+
+				return $id_mdc;
+			}
+		}
+
 		public function getMdcUsuarioId($sessao) {
 
 			$sql = $this->connection->prepare("SELECT mdc.id FROM mdc INNER JOIN usuarios 
@@ -64,6 +78,32 @@
 			$sql->execute();
 
 			return true;
+		}
+
+		public function cadastrarMDC($nome_mdc, $cidade, $funcao_chefe, $nome_chefe, 
+		$adido_financeiro, $ano) {
+
+			$sql = $this->connection->prepare("SELECT id FROM mdc WHERE nome_mdc =  ?");
+			$sql->bindValue(1, $nome_mdc);
+			$sql->execute();
+
+			if($sql->rowCount() <= 0) {
+
+				$sql = $this->connection->prepare("INSERT INTO mdc (nome_mdc, cidade_mdc, 
+				funcao_chefe, nome_chefe, adido_financeiro, ano) VALUES(?, ?, ?, ?, ?, ?)");
+
+				$sql->bindValue(1, $nome_mdc);
+				$sql->bindValue(2, $cidade);
+				$sql->bindValue(3, $funcao_chefe);
+				$sql->bindValue(4, $nome_chefe);
+				$sql->bindValue(5, $adido_financeiro);
+				$sql->bindValue(6, $ano);
+				$sql->execute();
+
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 ?>
